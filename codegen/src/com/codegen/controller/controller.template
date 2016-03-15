@@ -1,0 +1,162 @@
+package com.$projectName$.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.$projectName$.core.exception.BusinessException;
+import com.$projectName$.entity.$ModuleName$;
+import com.$projectName$.entity.$ModuleName$Example;
+import com.$projectName$.entity.$ModuleName$Service;
+
+
+@RestController
+public class $ModuleName$Controller {
+
+	private static Logger logger = Logger.getLogger($ModuleName$Controller.class);
+
+	@Autowired
+	private $ModuleName$Service $moduleName$Service;
+
+	/**
+	 * 添加
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/create")
+	public void create(HttpServletRequest request, HttpServletResponse response,$ModuleName$ $moduleName$) {
+		try {
+			$moduleName$Service.insert($moduleName$);
+			MVCUtil.responseJsonOfSuccess(response, "操作成功");
+		} catch (BusinessException e) {
+			MVCUtil.responseJsonOfError(response, e.getMessage());
+		} catch (Exception e) {
+			MVCUtil.responseJsonOfError(response,e.getMessage());
+			logger.warn(e);
+			logger.warn("Request Parameters : "+ JsonUtil.toJson(request.getParameterMap() ));
+		}
+	}
+
+	/**
+	 * 编辑
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/edit")
+	public void edit(HttpServletRequest request, HttpServletResponse response,$ModuleName$ $moduleName$) {
+		try {
+			$moduleName$Service.updateByPrimaryKeySelective($moduleName$);
+			MVCUtil.responseJsonOfSuccess(response, "操作成功");
+		} catch (BusinessException e) {
+			MVCUtil.responseJsonOfError(response, e.getMessage());
+		} catch (Exception e) {
+			MVCUtil.responseJsonOfError(response,e.getMessage());
+			logger.warn(e);
+			logger.warn("Request Parameters : "+ JsonUtil.toJson(request.getParameterMap() ));
+		}
+	}
+	
+	/**
+	 * 删除
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/delete")
+	public void delete(HttpServletRequest request, HttpServletResponse response,$ModuleName$ $moduleName$) {
+		try {
+			$moduleName$Service.deleteByPrimaryKey($moduleName$.getId());
+			MVCUtil.responseJsonOfSuccess(response, "操作成功");
+		} catch (BusinessException e) {
+			MVCUtil.responseJsonOfError(response, e.getMessage());
+		} catch (Exception e) {
+			MVCUtil.responseJsonOfError(response,e.getMessage());
+			logger.warn(e);
+			logger.warn("Request Parameters : "+ JsonUtil.toJson(request.getParameterMap() ));
+		}
+	}
+
+	/**
+	 * 列表
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/list")
+	public void list(HttpServletRequest request, HttpServletResponse response,$ModuleName$ $moduleName$) {
+		try {
+			int limit = NumberUtils.toInt(request.getParameter("_limit"));
+			int start=(NumberUtils.toInt(request.getParameter("currentPage"))-1)*Constants.PAGESIZE;
+			List<$ModuleName$> $moduleName$s;
+			$ModuleName$Example example = new $ModuleName$Example();
+			$ModuleName$Example.Criteria query = example.createCriteria();
+			
+			$moduleName$s = $moduleName$Service.list(example, new RowBounds(start, limit));
+			MVCUtil.responseJsonOfSuccess(response, $moduleName$s);
+		} catch (BusinessException e) {
+			MVCUtil.responseJsonOfError(response, e.getMessage());
+		} catch (Exception e) {
+			MVCUtil.responseJsonOfError(response,e.getMessage());
+			logger.warn(e);
+			logger.warn("Request Parameters : "+ JsonUtil.toJson(request.getParameterMap() ));
+		}
+		
+	}
+	 
+	
+	/**
+	 * 详细
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/detail")
+	public void detail(HttpServletRequest request, HttpServletResponse response,$ModuleName$ $moduleName$) {
+		try {
+			$ModuleName$ $moduleName$ = $moduleName$Service.selectByPrimaryKey($moduleName$.getId());
+			MVCUtil.responseJsonOfSuccess(response, $moduleName$);
+		} catch (BusinessException e) {
+			MVCUtil.responseJsonOfError(response, e.getMessage());
+		} catch (Exception e) {
+			MVCUtil.responseJsonOfError(response,e.getMessage());
+			logger.warn(e);
+			logger.warn("Request Parameters : "+ JsonUtil.toJson(request.getParameterMap() ));
+		}
+		
+	}
+	
+	/**
+	 * 总数
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/count")
+	public void count(HttpServletRequest request, HttpServletResponse response,$ModuleName$ $moduleName$) {
+		try {
+			$ModuleName$Example example = new $ModuleName$Example();
+			$ModuleName$Example.Criteria query = example.createCriteria();
+			
+			int count = $moduleName$Service.count(example);
+		
+			MVCUtil.responseJsonOfSuccess(response, count);
+		} catch (BusinessException e) {
+			MVCUtil.responseJsonOfError(response, e.getMessage());
+		} catch (Exception e) {
+			MVCUtil.responseJsonOfError(response,e.getMessage());
+			logger.warn(e);
+			logger.warn("Request Parameters : "+ JsonUtil.toJson(request.getParameterMap() ));
+		}
+	}
+}

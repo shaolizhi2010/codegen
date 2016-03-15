@@ -1,0 +1,60 @@
+package com.$projectName$.service;
+
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.$projectName$.core.exception.BusinessException;
+import com.$projectName$.entity.$ModuleName$;
+import com.$projectName$.entity.$ModuleName$Example;
+import com.$projectName$.mapper.$ModuleName$Mapper;
+import com.$projectName$.service.$ModuleName$Service;
+
+@Service("$moduleName$Service")
+public class $ModuleName$ServiceImpl implements $ModuleName$Service { 
+
+	@Autowired
+	private $ModuleName$Mapper $moduleName$Mapper;
+ 
+	private   static Logger logger = Logger.getLogger($ModuleName$ServiceImpl.class);
+	
+	@Override
+	public void insertSelective($ModuleName$ $moduleName$) throws BusinessException{
+		$moduleName$Mapper.insertSelective($moduleName$);
+	}
+	
+	@Override
+	public void deleteByPrimaryKey(Integer id) throws BusinessException{
+		$moduleName$Mapper.deleteByPrimaryKey(id);
+	}
+	
+	@Override
+	public void updateByPrimaryKeySelective($ModuleName$ $moduleName$) throws BusinessException{
+		$moduleName$Mapper.updateByPrimaryKeySelective($moduleName$);
+	}
+
+	@Override
+	public List<$ModuleName$> list($ModuleName$Example example,RowBounds bound) throws BusinessException {
+		return $moduleName$Mapper.selectPagination(example, bound);
+	}
+	
+	@Override
+	public List<$ModuleName$> list($ModuleName$Example example) throws BusinessException {
+		return $moduleName$Mapper.selectByExample(example);
+	}
+
+	@Override
+	public int count($ModuleName$Example example) throws BusinessException  {
+		return $moduleName$Mapper.countByExample(example);
+	}
+
+	@Override
+	public $ModuleName$ selectByPrimaryKey(Integer id) throws BusinessException {
+		return $moduleName$Mapper.selectByPrimaryKey(id);
+	}
+
+	
+}
