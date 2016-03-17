@@ -22,7 +22,7 @@ public class ControllerGenerator extends AbstractGenerator{
 		 	generatedCode = StringUtils.replace(generatedCode, "$moduleName$", moduleName);
 		 	generatedCode = StringUtils.replace(generatedCode, "$ModuleName$", moduleNameCapital);
 			
-			saveFile(generatedCode, srcPath+"controller\\" +moduleNameCapital+   "Controller.java");
+			saveFile(generatedCode, srcPath+"web\\controller\\" +moduleNameCapital+   "Controller.java");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

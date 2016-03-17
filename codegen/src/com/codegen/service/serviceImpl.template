@@ -1,4 +1,4 @@
-package com.$projectName$.service;
+package com.$projectName$.service.impl;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class $ModuleName$ServiceImpl implements $ModuleName$Service {
 
 	@Override
 	public List<$ModuleName$> list($ModuleName$Example example,RowBounds bound) throws BusinessException {
-		return $moduleName$Mapper.selectPagination(example, bound);
+		return $moduleName$Mapper.selectPage(example, bound);
 	}
 	
 	@Override

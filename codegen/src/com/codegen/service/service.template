@@ -11,9 +11,10 @@ import com.$projectName$.entity.$ModuleName$Example;
 public interface $ModuleName$Service {
 	public void insertSelective($ModuleName$ $moduleName$) throws BusinessException;
 	public void updateByPrimaryKeySelective($ModuleName$ $moduleName$) throws BusinessException;
+	public $ModuleName$ selectByPrimaryKey(Integer id) throws BusinessException;
+	public List<$ModuleName$> list($ModuleName$Example example) throws BusinessException;
 	public List<$ModuleName$> list($ModuleName$Example example,RowBounds bound) throws BusinessException;
 	public int count($ModuleName$Example example) throws BusinessException;
-	public List<$ModuleName$> list($ModuleName$Example example) throws BusinessException;
 	public void deleteByPrimaryKey(Integer id) throws BusinessException;
-	public $ModuleName$ selectByPrimaryKey(Integer id) throws BusinessException;
+	
 }
